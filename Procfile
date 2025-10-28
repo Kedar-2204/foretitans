@@ -1,1 +1,1 @@
-web: gunicorn fore.wsgi
+web: gunicorn fore_titans.wsgi
