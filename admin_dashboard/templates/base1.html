@@ -1,12 +1,13 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Dashboard</title>
-  <link rel="shortcut icon" type="image/png" href="static/images/ft1.png"/>
-  <link rel="stylesheet" href="static/css/styles.min.css" />
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/ft1.png' %}"/>
+  <link rel="stylesheet" href="{% static 'css/styles.min.css' %}" />
 </head>
 
 <body>
@@ -18,7 +19,7 @@
     <div class="app-topstrip bg-dark py-3 px-4 w-100 d-lg-flex align-items-center justify-content-between">
       <div class="d-none d-sm-flex align-items-center justify-content-center gap-9 mb-3 mb-lg-0">
         <a class="d-flex justify-content-center" href="#">
-          <img src="static/images/ft1.png" alt="" width="45"><h2 style="color:blue ; margin-top:9px">Fore Titans</h2>
+          <img src="{% static 'images/ft1.png' %}" alt="" width="45"><h2 style="color:blue ; margin-top:9px">Fore Titans</h2>
         </a>
 
         <div class="d-none d-xl-flex align-items-center gap-3 border-start border-white border-opacity-25 ps-9">
@@ -425,7 +426,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="static/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <img src="{% static 'images/profile/user-1.jpg' %}" alt="" width="35" height="35" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
@@ -461,13 +462,13 @@
     </div>
   </div>
   
-  <script src="static/libs/jquery/dist/jquery.min.js"></script>
-  <script src="static/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="static/js/sidebarmenu.js"></script>
-  <script src="static/js/app.min.js"></script>
-  <script src="static/libs/apexcharts/dist/apexcharts.min.js"></script>
-  <script src="static/libs/simplebar/dist/simplebar.js"></script>
-  <script src="static/js/dashboard.js"></script>
+<script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/sidebarmenu.js' %}"></script>
+<script src="{% static 'js/app.min.js' %}"></script>
+<script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+<script src="{% static 'libs/simplebar/dist/simplebar.js' %}"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 
