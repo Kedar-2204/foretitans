@@ -1,0 +1,36 @@
+{% extends "base1.html" %}
+{% block body %}
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-8">
+    <div class="card shadow-lg border-0">
+      <div class="card-header text-white" style="background: linear-gradient(135deg, #00c6ff, #0072ff);">
+        <h4 class="mb-0 fw-bold">
+          <i class="bi bi-trophy-fill me-2"></i> Upload Result
+        </h4>
+      </div>
+      <div class="card-body bg-light">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="result_heading" class="form-label fw-semibold">Result Heading</label>
+            <input type="text" name="result_heading" id="result_heading" class="form-control rounded-pill px-4 py-2 shadow-sm" placeholder="e.g., Final Match Result" required>
+          </div>
+          <div class="mb-3">
+            <label for="result_date" class="form-label fw-semibold">Date</label>
+            <input type="date" name="result_date" id="result_date" class="form-control rounded-pill px-4 py-2 shadow-sm" required>
+          </div>
+          <div class="mb-4">
+            <label for="result_image" class="form-label fw-semibold">Upload Result Image</label>
+            <input type="file" name="result_image" id="result_image" class="form-control rounded-pill px-4 py-2 shadow-sm" required>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow">
+              <i class="bi bi-upload me-1"></i> Submit Result
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

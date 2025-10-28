@@ -1,0 +1,40 @@
+{% extends "base1.html" %}
+{% block body %}
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-8">
+    <div class="card shadow-lg border-0">
+      <div class="card-header text-white" style="background: linear-gradient(135deg,rgb(204, 206, 245),rgb(224, 225, 245));">
+        <h4 class="mb-0 fw-bold">
+          <i class="bi bi-person-plus-fill me-2"></i> Add Organiser & Associations with
+        </h4>
+      </div>
+      <div class="card-body bg-light">
+        <form action="" method="POST" enctype="multipart/form-data" class="p-2">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="organiser_name" class="form-label fw-semibold">Organiser Name</label>
+            <input type="text" class="form-control rounded-pill px-4 py-2 shadow-sm" name="organiser_name" id="organiser_name" placeholder="Enter name" required>
+          </div>
+          <div class="mb-4">
+            <label for="organiser_role" class="form-label fw-semibold">Role</label>
+            <input type="text" class="form-control rounded-pill px-4 py-2 shadow-sm" name="organiser_role" id="organiser_role" placeholder="Enter role (e.g. Event Manager)" required>
+          </div>
+          <div class="mb-4">
+            <label for="organiser_info" class="form-label fw-semibold">Information</label>
+            <textarea class="form-control rounded-4 px-4 py-2 shadow-sm" name="organiser_info" id="organiser_info" rows="4" placeholder="Write about the organiser..." required></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="organiser_photo" class="form-label fw-semibold">Upload Photo</label>
+            <input type="file" class="form-control rounded-pill px-4 py-2 shadow-sm" name="organiser_photo" id="organiser_photo" required>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg rounded-pill px-5 shadow">
+              <i class="bi bi-person-check-fill me-1"></i> Add Organiser
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

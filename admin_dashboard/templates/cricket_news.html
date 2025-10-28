@@ -1,0 +1,54 @@
+{% extends "base1.html" %}
+{% block body %}
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-9">
+    <div class="card shadow-lg border-0">
+      <div class="card-header text-white" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
+        <h4 class="mb-0 fw-bold">
+          <i class="bi bi-megaphone-fill me-2"></i> Add Cricket News
+        </h4>
+      </div>
+      <div class="card-body bg-light">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="news_heading" class="form-label fw-semibold">News Heading</label>
+            <input type="text" name="news_heading" id="news_heading" class="form-control rounded-pill px-4 py-2 shadow-sm" placeholder="Enter headline" required>
+          </div>
+          <div class="mb-3">
+            <label for="news_subheading" class="form-label fw-semibold">Subheading</label>
+            <input type="text" name="news_subheading" id="news_subheading" class="form-control rounded-pill px-4 py-2 shadow-sm" placeholder="Enter subheadline">
+          </div>
+          <div class="mb-3">
+            <label for="news_content" class="form-label fw-semibold">Detailed Info</label>
+            <textarea name="news_content" id="news_content" rows="8" class="form-control shadow-sm rounded-4" placeholder="Type news content here with formatting..." required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="news_link" class="form-label fw-semibold">External News Link (Optional)</label>
+            <input type="url" name="news_link" id="news_link" class="form-control rounded-pill px-4 py-2 shadow-sm" placeholder="https://example.com/news">
+          </div>
+          <div class="mb-3">
+            <label for="news_image" class="form-label fw-semibold">Upload Image (Optional)</label>
+            <input type="file" name="news_image" id="news_image" class="form-control rounded-pill px-4 py-2 shadow-sm">
+          </div>
+          <div class="mb-4">
+            <label for="news_video" class="form-label fw-semibold">Upload Video (Optional)</label>
+            <input type="file" name="news_video" id="news_video" class="form-control rounded-pill px-4 py-2 shadow-sm">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow">
+              <i class="bi bi-upload me-1"></i> Submit News
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional: Rich Text Editor -->
+<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('news_content');
+</script>
+{% endblock %}

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Fore Titans{% endblock %}</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+        }
+
+        .top-info-bar {
+            background-color: #0d012e;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.628rem 1.5rem;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+
+            position: fixed;
+            /* ✅ Stick at top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            /* Keep above other content */
+        }
+
+        .top-info-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: #ff8c00;
+            border-radius: 9999px;
+            flex-shrink: 0;
+        }
+
+        .navbar-main {
+            background-color: #0e1a2b;
+            color: white;
+            padding: 1.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            /* ✅ Stick below marquee */
+            top: 2.2rem;
+            /* Height of marquee (adjust if needed) */
+            left: 0;
+            width: 100%;
+            z-index: 40;
+            padding-left: 1rem;
+            padding-right: 2rem;
+            /* Just below marquee */
+        }
+
+        .nav-link-item {
+            color: white;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+            padding: 0.5rem 2rem;
+            display: flex;
+            /* ✅ Make all nav items flex */
+            align-items: center;
+            /* ✅ Vertically center text/icons */
+            gap: 0.25rem;
+            position: relative;
+        }
+
+        .nav-link-item:hover {
+            color: #facc15;
+        }
+
+        /* Line styling */
+.nav-link-item::after {
+    content: "";
+    position: absolute;
+    right: -12px; /* adjust spacing from text */
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, #ff8c00, #facc15);
+    transition: transform 0.3s ease;
+}
+
+.nav-link-item::before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, #ff8c00, #facc15);
+    transition: transform 0.3s ease;
+}
+
+/* Animate line on hover */
+.nav-link-item:hover::after {
+    transform: translateY(-50%) scaleY(1);
+}
+
+.nav-link-item:hover::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+        .block {
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .block:hover {
+            color: #facc15;
+        }
+
+        .centered-logo-container {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            /* stack logo and text vertically */
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .centered-logo {
+            height: 6rem;
+            border: 4px solid white;
+            border-radius: 9999px;
+            background-color: white;
+            object-fit: contain;
+            padding: 0.25rem;
+        }
+
+        .logo-text {
+            margin-top: 0.2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: black;
+            /* change color based on your background */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            /* makes text visible on image */
+        }
+
+        .main-footer {
+            background-color: #0e1a2b;
+            color: white;
+            padding: 2.5rem 1.5rem;
+            margin-top: 2rem;
+            border-top: 3px solid #ff8c00;
+        }
+
+        .footer-logo-text {
+            font-weight: 800;
+            font-size: 1.875rem;
+        }
+
+        .footer-logo-subtext {
+            color: #ff8c00;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .footer-link-heading {
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #ff8c00;
+        }
+
+        .footer-link {
+            display: block;
+            color: #a0aec0;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-main ul {
+                display: none;
+            }
+
+            .main-footer .grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .logo-text-card {
+            background: white;
+            padding: 5px 16px;
+            margin-top: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-text-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+    /* Logo छोटं */
+    .centered-logo {
+        height: 3.2rem;
+        border-width: 2px;
+    }
+
+    /* Tagline कार्ड अजून कॉम्पॅक्ट */
+    .logo-text {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 6px;
+    }
+
+    /* Logo-container वरून खाली shift */
+    .centered-logo-container {
+        margin: 0.2rem auto 0.8rem auto;
+    }
+
+    /* Navbar items clear दिसतील */
+    #mobile-menu a {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.6rem 0.75rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+}
+@media (max-width: 768px) {
+    /* Mobile menu थोडं खाली येईल */
+    #mobile-menu {
+        margin-top: 8rem; /* इथे value adjust करून बघ */
+    }
+}
+
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔹 Top Info Bar -->
+    <div class="top-info-bar">
+        <marquee behavior="scroll" direction="left" scrollamount="5" loop="infinite">
+            <div class="flex gap-6">
+                <div class="flex items-center gap-2"><span class="top-info-dot"></span>“🏏 Get Ready! The Pratapgad T20
+                    Championship kicks off on 5th September 2025 – Watch it LIVE on Sportsvot App!”</div><br>
+                <div class="flex items-center gap-2"><span class="top-info-dot"></span>“🏏 Get Ready! The Pratapgad T20
+                    Championship kicks off on 5th September 2025 – Watch it LIVE on Sportsvot App!”</div><br>
+                <div class="flex items-center gap-2"><span class="top-info-dot"></span>“🏏 Get Ready! The Pratapgad T20
+                    Championship kicks off on 5th September 2025 – Watch it LIVE on Sportsvot App!”</div><br>
+            </div>
+        </marquee>
+    </div>
+
+    <!-- 🔹 Navbar -->
+    <!-- 🔹 Navbar -->
+    <nav class="navbar-main">
+        <!-- Left Menu -->
+        <ul class="hidden lg:flex gap-6">
+            <li><a href="/" class="nav-link-item">Home</a></li>
+            <li><a href="about" class="nav-link-item">About</a></li>
+            <li><a href="gallary" class="nav-link-item">Gallary</a></li>
+
+            <li class="relative group">
+                <!-- Parent Link -->
+                <a href="tournaments" class="nav-link-item flex items-center gap-2 cursor-pointer">
+                    Tournaments
+                    <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:rotate-180" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+
+                <!-- Dropdown Menu -->
+                <ul class="absolute left-0 top-full mt-2 min-w-[200px] rounded-xl bg-white/90 
+             backdrop-blur-md text-gray-800 shadow-lg border border-gray-200 
+             opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+             translate-y-2 group-hover:translate-y-0 transition-all duration-300 
+             z-20 overflow-hidden">
+
+                    <li>
+                        <a href="current_tournaments" class="flex items-center gap-2 px-4 py-3 hover:bg-gradient-to-r 
+                hover:from-indigo-500 hover:to-purple-500 hover:text-white 
+                transition-all duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2L2 7h16L10 2z"></path>
+                            </svg>
+                            Current
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="upcoming_tournaments" class="flex items-center gap-2 px-4 py-3 hover:bg-gradient-to-r 
+                hover:from-pink-500 hover:to-orange-500 hover:text-white 
+                transition-all duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 3h12v2H4zM4 7h12v2H4zM4 11h12v2H4zM4 15h12v2H4z"></path>
+                            </svg>
+                            Upcoming
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="past_tournaments" class="flex items-center gap-2 px-4 py-3 hover:bg-gradient-to-r 
+                hover:from-green-500 hover:to-blue-500 hover:text-white 
+                transition-all duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 20l-6-6h12l-6 6z"></path>
+                            </svg>
+                            Past
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <!-- Logo -->
+        <div class="centered-logo-container">
+            <img src="static/img/ft.jpg" alt="Logo" class="centered-logo">
+            <div class="logo-text-card">
+                <p class="logo-text">Driven by Passion</p>
+            </div>
+        </div>
+
+
+
+        <!-- Right Menu -->
+        <ul class="hidden lg:flex gap-6 ml-auto">
+            <li><a href="our_work" class="nav-link-item">Our Work</a></li>
+            <li><a href="news" class="nav-link-item">News</a></li>
+            <li><a href="blog" class="nav-link-item">Blogs</a></li>
+            <li><a href="contact" class="nav-link-item">Contact Us</a></li>
+        </ul>
+        <button id="mobile-menu-button" class="lg:hidden text-white text-3xl ml-auto">
+            ☰
+        </button>
+    </nav>
+
+<!-- 🔹 Mobile Menu -->
+<div id="mobile-menu" class="hidden bg-[#0e1a2b] text-white p-6 space-y-4">
+    <a href="/" class="block">Home</a>
+    <a href="about" class="block">About</a>
+    <a href="gallary" class="block">Gallary</a>
+
+    <!-- Collapsible Tournaments Dropdown -->
+   <!-- Collapsible Tournaments Dropdown with parent link -->
+<div>
+    <div class="w-full flex justify-between items-center px-2 py-2 font-bold uppercase">
+        <!-- Parent link -->
+        <a href="tournaments" class="block flex-1">Tournaments</a>
+        <!-- Dropdown toggle -->
+        <button id="tournament-toggle" type="button">
+            <i class="bi bi-chevron-down"></i>
+        </button>
+    </div>
+    <div id="tournament-dropdown" class="hidden ml-4 mt-2 space-y-2">
+        <a href="current_tournaments" class="block">Current</a>
+        <a href="upcoming_tournaments" class="block">Upcoming</a>
+        <a href="past_tournaments" class="block">Past</a>
+    </div>
+</div>
+
+
+    <a href="our_work" class="block">Our Work</a>
+    <a href="news" class="block">News</a>
+    <a href="blog" class="block">Blogs</a>
+    <a href="contact" class="block">Contact Us</a>
+</div>
+
+    <!-- 🔹 Main Content -->
+    <main>
+        {% block body %}{% endblock body %}
+    </main>
+
+    <!-- 🔹 Footer -->
+    <footer class="main-footer">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+            <a href="{% url 'about' %}" class="footer-logo-text cursor-pointer hover:text-yellow-400 transition-colors duration-300">
+                <span class="footer-logo-text">Fore Titans</span>
+                <p class="text-gray-400 text-sm mt-2">Founded in 2017, Fore Titans Sports and Events Company has grown
+                    into a trusted name in the sports industry, delivering world-class experiences across all levels of
+                    the game.
+                </p>
+                </a>
+            </div>
+            <div>
+                <h3 class="footer-link-heading">Quick Links</h3>
+                <ul>
+                    <li><a href="/" class="footer-link">Home</a></li>
+                    <li><a href="our_work" class="footer-link">Our Work</a></li>
+                    <li><a href="gallary" class="footer-link">Gallary</a></li>
+                    <li><a href="tournaments" class="footer-link">Tournaments</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-link-heading">Important Links</h3>
+                <ul>
+                    <li><a href="news" class="footer-link">News</a></li>
+                    <li><a href="#" class="footer-link">Sponsors</a></li>
+                    <li><a href="blog" class="footer-link">Blog</a></li>
+                    <li><a href="about" class="footer-link">About</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-link-heading">Contact Us:</h3>
+                <p class="text-gray-400 text-sm">Email: {{ contact_info.email }}</p>
+                <p class="text-gray-400 text-sm">Phone: {{ contact_info.contact_number }}</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 text-sm">
+            &copy; 2025 FT. All rights reserved.
+        </div>
+    </footer>
+    <script>
+    // Existing mobile menu toggle
+    document.getElementById("mobile-menu-button").addEventListener("click", function () {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+    });
+
+    // New tournament dropdown toggle
+    document.getElementById("tournament-toggle").addEventListener("click", function () {
+        document.getElementById("tournament-dropdown").classList.toggle("hidden");
+    });
+</script>
+
+
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

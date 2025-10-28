@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<!-- News Page -->
+<section class="bg-[#0b0b66] min-h-screen py-12">
+
+  <!-- Heading -->
+  <div class="w-full bg-white py-10 shadow-lg mb-12" style="margin-top:170px">
+    <div class="text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-yellow-500 uppercase tracking-widest">
+        News
+      </h1>
+      <p class="text-gray-700 mt-2 text-lg">Latest updates, featured stories & trending highlights</p>
+    </div>
+  </div>
+
+  <!-- Main Layout: News + Ads -->
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-4 gap-8 relative">
+
+    <!-- LEFT SIDE (NEWS CONTENT) -->
+    <div class="lg:col-span-3 space-y-12 pr-6 border-r-0 lg:border-r-4 border-dashed border-yellow-400 relative">
+      <!-- Animated Divider Glow -->
+      <div class="hidden lg:block absolute top-0 right-0 h-full w-[3px] bg-gradient-to-b from-yellow-400 via-yellow-200 to-yellow-400 animate-pulse shadow-[0_0_15px_rgba(250,204,21,0.8)]"></div>
+
+      <!-- Featured Section -->
+      <div>
+        <h2 class="text-2xl font-bold text-white mb-4 border-b-2 border-yellow-400 inline-block">
+          Featured News
+        </h2>
+
+        <div class="flex space-x-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-yellow-400">
+          {% for news in news_list %}
+          {% if news.image %}
+          <div class="js-open-modal bg-white min-w-[260px] rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer"
+               data-image="{{ news.image.url }}"
+               data-caption="{{ news.heading }}">
+            <img src="{{ news.image.url }}" alt="{{ news.heading }}" class="w-full h-44 object-cover">
+          {% else %}
+          <div class="js-open-modal bg-white min-w-[260px] rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer"
+               data-image="{% static 'img/default.jpeg' %}"
+               data-caption="{{ news.heading }}">
+            <img src="{% static 'img/default.jpeg' %}" alt="{{ news.heading }}" class="w-full h-44 object-cover">
+          {% endif %}
+            <div class="p-3">
+              <span class="text-xs uppercase font-bold text-yellow-500">Featured</span>
+              <h3 class="font-semibold text-gray-900 text-sm mt-1">{{ news.heading }}</h3>
+              {% if news.date %}
+              <p class="text-xs text-gray-500 mt-1"><i class="bi bi-calendar-event"></i> {{ news.date }}</p>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Latest News Section -->
+      <div>
+        <h2 class="text-2xl font-bold text-white mb-4 border-b-2 border-yellow-400 inline-block">
+          Latest News
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {% for news in news_list %}
+          {% if news.image %}
+          <div class="js-open-modal bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer"
+               data-image="{{ news.image.url }}"
+               data-caption="{{ news.heading }}">
+            <img src="{{ news.image.url }}" alt="{{ news.heading }}" class="w-full h-40 object-cover">
+          {% else %}
+          <div class="js-open-modal bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer"
+               data-image="{% static 'img/default.jpeg' %}"
+               data-caption="{{ news.heading }}">
+            <img src="{% static 'img/default.jpeg' %}" alt="{{ news.heading }}" class="w-full h-40 object-cover">
+          {% endif %}
+            <div class="p-4">
+              <h3 class="font-semibold text-lg text-gray-900 leading-tight line-clamp-2">
+                {{ news.heading }}
+              </h3>
+              {% if news.date %}
+              <p class="text-sm text-gray-500 mt-2"><i class="bi bi-calendar-event"></i> {{ news.date }}</p>
+              {% endif %}
+              <span class="inline-block mt-3 text-xs bg-yellow-400 text-black px-2 py-1 rounded-full font-semibold">View Image</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (ADVERTISEMENT COLUMN) -->
+<div class="space-y-6">
+  <h2 class="text-lg font-bold text-white border-b border-yellow-400 pb-2">Advertisement</h2>
+
+  {% for ad in ads %}
+    <img src="{{ ad.image.url }}" alt="Advertisement"
+         class="w-full rounded-lg shadow-lg hover:scale-105 transition">
+  {% empty %}
+    <p class="text-gray-300">No advertisements available.</p>
+  {% endfor %}
+</div>
+
+
+  </div>
+</section>
+
+<!-- Image Modal -->
+<div id="imageModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+  <div class="relative max-w-4xl w-[92vw]">
+    <button id="modalCloseBtn" class="absolute -top-10 right-0 text-white text-4xl leading-none">&times;</button>
+    <img id="modalImage" src="" alt="News Image" class="w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+    <p id="modalCaption" class="text-center text-white mt-4"></p>
+  </div>
+</div>
+
+<!-- Modal Script (no inline logic) -->
+<script>
+  (function () {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalCap = document.getElementById('modalCaption');
+    const closeBtn = document.getElementById('modalCloseBtn');
+
+    // Event delegation: open modal
+    document.addEventListener('click', function (e) {
+      const card = e.target.closest('.js-open-modal');
+      if (!card) return;
+
+      const src = card.getAttribute('data-image') || '';
+      const caption = card.getAttribute('data-caption') || '';
+
+      if (!src) return;
+
+      modalImg.src = src;
+      modalCap.textContent = caption;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    });
+
+    // Close modal
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modalImg.src = '';
+      modalCap.textContent = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+
+    // Click outside image to close
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+
+    // ESC key to close
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  })();
+</script>
+
+{% endblock body %}

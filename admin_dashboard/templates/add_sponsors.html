@@ -1,0 +1,66 @@
+{% extends "base1.html" %}
+{% block body %}
+<div class="row justify-content-center mt-4">
+  <!-- Sponsor Form -->
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow-lg border-0">
+      <div class="card-header text-white" style="background: linear-gradient(135deg, #f857a6, #ff5858);">
+        <h4 class="mb-0 fw-bold"><i class="bi bi-briefcase-fill me-2"></i> Add Sponsor</h4>
+      </div>
+      <div class="card-body bg-light">
+        <form method="POST" enctype="multipart/form-data" class="p-2">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="sponsor_image" class="form-label fw-semibold">Sponsor Image</label>
+            <input type="file" class="form-control rounded-pill px-4 py-2 shadow-sm" name="sponsor_image" required>
+          </div>
+          <div class="mb-4">
+            <label for="sponsor_url" class="form-label fw-semibold">Sponsor URL (optional)</label>
+            <input type="url" class="form-control rounded-pill px-4 py-2 shadow-sm" name="sponsor_url" placeholder="https://example.com">
+          </div>
+          <div class="mb-4">
+            <label for="sponsor_info" class="form-label fw-semibold">Sponsor Info (if no URL)</label>
+            <textarea class="form-control rounded-4 px-4 py-2 shadow-sm" name="sponsor_info" rows="3" placeholder="Brief description about sponsor"></textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-danger btn-lg rounded-pill px-5 shadow" name="sponsor_submit">
+              <i class="bi bi-upload me-1"></i> Add Sponsor
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team Entry Form -->
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow-lg border-0">
+      <div class="card-header text-white" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);">
+        <h4 class="mb-0 fw-bold"><i class="bi bi-person-badge-fill me-2"></i> Add Team Entry</h4>
+      </div>
+      <div class="card-body bg-light">
+        <form method="POST" enctype="multipart/form-data" class="p-2">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="owner_name" class="form-label fw-semibold">Team Owner Name</label>
+            <input type="text" class="form-control rounded-pill px-4 py-2 shadow-sm" name="owner_name" required>
+          </div>
+          <div class="mb-4">
+            <label for="team_name" class="form-label fw-semibold">Team Name</label>
+            <input type="text" class="form-control rounded-pill px-4 py-2 shadow-sm" name="team_name" required>
+          </div>
+          <div class="mb-4">
+            <label for="team_photo" class="form-label fw-semibold">Team Photo</label>
+            <input type="file" class="form-control rounded-pill px-4 py-2 shadow-sm" name="team_photo" required>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow" name="team_submit">
+              <i class="bi bi-upload me-1"></i> Add Team
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

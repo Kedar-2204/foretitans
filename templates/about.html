@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+<!-- About Us Page -->
+<section class="bg-[#0e1a2b] text-white">
+
+  <!-- Hero -->
+  <div class="bg-white py-12 text-center" style="margin-top:170px">
+    <h1 class="text-3xl md:text-4xl font-bold"><span class="text-[#0e1a2b]">ABOUT US</span></h1>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- Who We Are -->
+
+    <div>
+      <h2 class="text-2xl font-bold flex items-center gap-2 mb-6">
+        <span>WHO WE ARE</span> <span class="text-yellow-400">▶</span>
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <!-- Left side image -->
+        <img src="static/img/logos.jpeg" alt="Who We Are" class="rounded shadow-md">
+
+        <!-- Right side text -->
+        <div class="text-gray-200 leading-relaxed space-y-4" style="text-align: justify; text-justify: inter-word;">
+          <p>
+            <strong>Founded in 2017, Fore Titans Sports and Events Company</strong> has grown into a trusted name in the
+            sports industry, delivering world-class experiences across all levels of the game. From <em>grassroots
+              tournaments</em> to <em>international events</em>, we provide complete solutions in <strong>player
+              management, sponsorships, event management, broadcasting, and sports tour management</strong>.
+          </p>
+
+          <p>
+            With a strong track record of successfully organizing <strong>100+ cricket events</strong> in partnership
+            with multiple leading brands, Fore Titans has consistently showcased <em>excellence, professionalism, and
+              innovation</em>. Our goal is to create impactful sporting platforms that nurture talent, engage fans, and
+            connect brands with the passion of sports.
+          </p>
+
+          <p>
+            At Fore Titans, we believe sports are more than just competition – they are about <em>opportunity, growth,
+              and inspiration</em>. Whether managing players, executing large-scale events, or building brand
+            partnerships, we remain committed to driving sports to the next level.
+          </p>
+
+          <p class="text-yellow-400 font-semibold italic underline">
+            Fore Titans – Powering Sports, Players, and Events.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Mission & Vision -->
+    <div>
+      <h2 class="text-2xl font-bold flex items-center gap-2 mb-6">
+        <span>MISSION VISION</span> <span class="text-yellow-400">▶</span>
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Mission -->
+        <div class="bg-[#16167a] p-6 rounded-lg shadow-md">
+          <h3 class="text-lg font-bold bg-yellow-400 text-black px-3 py-1 inline-block rounded mb-4">MISSION</h3>
+          <p class="text-gray-200 leading-relaxed">
+            To nurture talent, create opportunities, and deliver impactful sporting experiences from grassroots to
+            international levels through professional management, strong partnerships, and world-class events.
+          </p>
+        </div>
+        <!-- Vision -->
+        <div class="bg-[#16167a] p-6 rounded-lg shadow-md">
+          <h3 class="text-lg font-bold bg-yellow-400 text-black px-3 py-1 inline-block rounded mb-4">VISION</h3>
+          <p class="text-gray-200 leading-relaxed">
+            To be a global leader in sports and event management, empowering athletes, brands, and fans through
+            innovation, excellence, and passion for sports.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Founder’s Message -->
+    <div>
+      <h2 class="text-2xl font-bold flex items-center gap-2 mb-6">
+        <span>FOUNDERS MESSAGE</span> <span class="text-yellow-400">▶</span>
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <img src="static/img/gaurav.jpeg" alt="Founder" class="rounded shadow-md">
+        <div style="text-align: justify; text-justify: inter-word;">
+          <p class="text-gray-200 leading-relaxed mb-4">
+            As <strong>founders</strong>, we believe sports are more than just games –
+            they are a <strong>force that inspires, unites, and empowers people</strong>.
+            Our mission is to bridge the gap between <strong>grassroots and global arenas</strong>,
+            ensuring that every player, partner, and fan experiences the very best.
+            <br><br>
+            We are committed to building <span class="font-semibold">Fore Titans</span>
+            into a trusted name in sports, where <strong>professionalism, innovation, and integrity</strong>
+            drive everything we do. Together, let’s shape the <strong>future of sports</strong>
+            and create <span class="italic">moments that last a lifetime</span>.
+            <br><br>
+            Looking ahead, we aim to integrate <strong>technology into sports</strong>
+            to enhance accuracy, performance, and overall development of the game.
+            From <strong>data-driven player analysis</strong> to
+            <strong>advanced event management systems</strong>,
+            we see technology as a <span class="font-semibold">game-changing force</span>
+            in the sports industry.
+            <br><br>
+            By combining <strong>passion with innovation</strong>,
+            <span class="font-semibold">Fore Titans</span> is not only
+            managing sports but also <strong>transforming the way the game is played,
+              experienced, and celebrated</strong>.
+          </p>
+
+          <p class="font-bold text-white">GAURAV PATIL</p>
+          <p>DIRECTOR & CEO</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Team Section -->
+<section>
+  <div class="bg-white py-10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold flex items-center justify-center gap-2">
+        <span>OUR TEAM</span> 
+        <span class="text-yellow-400">▶</span>
+      </h2>
+    </div>
+  </div>
+
+  <div class="bg-[#0e1a2b] py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center text-white">
+
+      <!-- Founder & Co-Founder -->
+      <h3 class="text-2xl font-semibold mb-10">Founder & Co-Founder</h3>
+      <div class="flex flex-wrap justify-center gap-10 mb-16">
+        {% for member in team %}
+          {% if member.role == "Founder" or member.role == "Co-Founder" %}
+          <div class="flip-card w-64 h-80">
+            <div class="flip-inner">
+              <!-- Front -->
+              <div class="flip-front bg-white text-black rounded-xl shadow-lg p-6">
+                <img src="{{ member.image.url }}" class="mx-auto h-44 w-44 object-cover rounded-xl mb-4">
+                <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                <p class="text-gray-600">{{ member.role }}</p>
+              </div>
+              <!-- Back -->
+              <div class="flip-back rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-white relative"
+                   style="background: url('{{ member.image.url }}') center/cover no-repeat;">
+                <div class="absolute inset-0 bg-black/60 rounded-xl"></div>
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                  <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                  <p>{{ member.role }}</p>
+                  <div class="flex gap-4 mt-4 text-xl">
+                    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin"></i></a>{% endif %}
+                    {% if member.instagram %}<a href="{{ member.instagram }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>{% endif %}
+                    {% if member.facebook %}<a href="{{ member.facebook }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>{% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Head of Team -->
+      <h3 class="text-2xl font-semibold mb-10">Head of Team</h3>
+      <div class="flex flex-wrap justify-center gap-10 mb-16">
+        {% for member in team %}
+          {% if member.role == "Head of Team" %}
+          <div class="flip-card w-64 h-80">
+            <div class="flip-inner">
+              <!-- Front -->
+              <div class="flip-front bg-white text-black rounded-xl shadow-lg p-6">
+                <img src="{{ member.image.url }}" class="mx-auto h-44 w-44 object-cover rounded-xl mb-4">
+                <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                <p class="text-gray-600">{{ member.role }}</p>
+              </div>
+              <!-- Back -->
+              <div class="flip-back rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-white relative"
+                   style="background: url('{{ member.image.url }}') center/cover no-repeat;">
+                <div class="absolute inset-0 bg-black/60 rounded-xl"></div>
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                  <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                  <p>{{ member.role }}</p>
+                  <div class="flex gap-4 mt-4 text-xl">
+                    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin"></i></a>{% endif %}
+                    {% if member.instagram %}<a href="{{ member.instagram }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>{% endif %}
+                    {% if member.facebook %}<a href="{{ member.facebook }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>{% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Event Manager -->
+      <h3 class="text-2xl font-semibold mb-10">Event Manager</h3>
+      <div class="flex flex-wrap justify-center gap-10 mb-16">
+        {% for member in team %}
+          {% if member.role == "Event Manager" %}
+          <div class="flip-card w-64 h-80">
+            <div class="flip-inner">
+              <!-- Front -->
+              <div class="flip-front bg-white text-black rounded-xl shadow-lg p-6">
+                <img src="{{ member.image.url }}" class="mx-auto h-44 w-44 object-cover rounded-xl mb-4">
+                <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                <p class="text-gray-600">{{ member.role }}</p>
+              </div>
+              <!-- Back -->
+              <div class="flip-back rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-white relative"
+                   style="background: url('{{ member.image.url }}') center/cover no-repeat;">
+                <div class="absolute inset-0 bg-black/60 rounded-xl"></div>
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                  <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                  <p>{{ member.role }}</p>
+                  <div class="flex gap-4 mt-4 text-xl">
+                    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin"></i></a>{% endif %}
+                    {% if member.instagram %}<a href="{{ member.instagram }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>{% endif %}
+                    {% if member.facebook %}<a href="{{ member.facebook }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>{% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Umpire -->
+      <h3 class="text-2xl font-semibold mb-10">Umpire</h3>
+      <div class="flex flex-wrap justify-center gap-10 mb-16">
+        {% for member in team %}
+          {% if member.role == "Official Umpire" %}
+          <div class="flip-card w-64 h-80">
+            <div class="flip-inner">
+              <!-- Front -->
+              <div class="flip-front bg-white text-black rounded-xl shadow-lg p-6">
+                <img src="{{ member.image.url }}" class="mx-auto h-44 w-44 object-cover rounded-xl mb-4">
+                <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                <p class="text-gray-600">{{ member.role }}</p>
+              </div>
+              <!-- Back -->
+              <div class="flip-back rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-white relative"
+                   style="background: url('{{ member.image.url }}') center/cover no-repeat;">
+                <div class="absolute inset-0 bg-black/60 rounded-xl"></div>
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                  <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                  <p>{{ member.role }}</p>
+                  <div class="flex gap-4 mt-4 text-xl">
+                    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin"></i></a>{% endif %}
+                    {% if member.instagram %}<a href="{{ member.instagram }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>{% endif %}
+                    {% if member.facebook %}<a href="{{ member.facebook }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>{% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Management Staff -->
+      <h3 class="text-2xl font-semibold mb-10">Management Staff</h3>
+      <div class="flex flex-wrap justify-center gap-10">
+        {% for member in team %}
+          {% if member.role == "Management Staff" %}
+          <div class="flip-card w-64 h-80">
+            <div class="flip-inner">
+              <!-- Front -->
+              <div class="flip-front bg-white text-black rounded-xl shadow-lg p-6">
+                <img src="{{ member.image.url }}" class="mx-auto h-44 w-44 object-cover rounded-xl mb-4">
+                <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                <p class="text-gray-600">{{ member.role }}</p>
+              </div>
+              <!-- Back -->
+              <div class="flip-back rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-white relative"
+                   style="background: url('{{ member.image.url }}') center/cover no-repeat;">
+                <div class="absolute inset-0 bg-black/60 rounded-xl"></div>
+                <div class="relative z-10 flex flex-col items-center justify-center">
+                  <h4 class="text-lg font-bold">{{ member.name }}</h4>
+                  <p>{{ member.role }}</p>
+                  <div class="flex gap-4 mt-4 text-xl">
+                    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin"></i></a>{% endif %}
+                    {% if member.instagram %}<a href="{{ member.instagram }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>{% endif %}
+                    {% if member.facebook %}<a href="{{ member.facebook }}" target="_blank" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>{% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bg-white h-8"></div>
+</section>
+
+
+<!-- Partners Section -->
+<section class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-2xl font-bold flex items-center justify-center gap-2 mb-12">
+      <span>PARTNERS</span> <span class="text-yellow-400">▶</span>
+    </h2>
+
+    <!-- Principal Partner -->
+    <div class="mb-10">
+      <h3 class="text-xl font-semibold mb-3">PRINCIPAL PARTNER</h3>
+      <img src="principal-partner.png" alt="Principal Partner" class="mx-auto h-24 object-contain">
+    </div>
+
+    <!-- Partners Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+      <div>
+        <h4 class="text-sm font-medium mb-2">CO-POWERED BY</h4>
+        <img src="partner1.png" alt="Partner 1" class="mx-auto h-14 object-contain">
+      </div>
+      <div>
+        <h4 class="text-sm font-medium mb-2">SUPPORTING PARTNER</h4>
+        <img src="partner2.png" alt="Partner 2" class="mx-auto h-14 object-contain">
+      </div>
+      <div>
+        <h4 class="text-sm font-medium mb-2">ORGANIZING PARTNER</h4>
+        <img src="partner3.png" alt="Partner 3" class="mx-auto h-14 object-contain">
+      </div>
+      <div>
+        <h4 class="text-sm font-medium mb-2">STRENGTH PARTNER</h4>
+        <img src="partner4.png" alt="Partner 4" class="mx-auto h-14 object-contain">
+      </div>
+      <div>
+        <h4 class="text-sm font-medium mb-2">ASSOCIATE PARTNER</h4>
+        <img src="partner5.png" alt="Partner 5" class="mx-auto h-14 object-contain">
+      </div>
+      <!-- repeat for other partners -->
+    </div>
+  </div>
+</section>
+<style>
+  .flip-card {
+    perspective: 1000px;
+  }
+  .flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  .flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  .flip-back {
+    transform: rotateY(180deg);
+  }
+</style>
+
+<!-- FontAwesome for social icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+{% endblock body %}

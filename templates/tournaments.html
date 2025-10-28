@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block body %}
+
+<!-- TOURNAMENT PAGE -->
+<section class="bg-[#0b0b66] py-12">
+
+  <!-- Heading -->
+  <div class="text-center mb-10"style="margin-top:170px">
+    <h1 class="text-4xl md:text-5xl font-bold text-white uppercase tracking-wide">
+      Tournaments
+    </h1>
+  </div>
+
+  <!-- CONTAINER -->
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Current Tournaments -->
+    <div class="bg-white rounded-3xl shadow-lg p-8 mb-16">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">🏆 Current Tournaments</h2>
+      {% if current_tournaments %}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {% for t in current_tournaments %}
+        <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-6 text-center">
+          <img src="{{ t.logo.url }}" alt="{{ t.name }}" class="w-20 h-20 mx-auto mb-4">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">{{ t.name }}</h3>
+          <p class="text-gray-600 text-sm mb-2">📅 {{ t.start_date }} - {{ t.end_date }}</p>
+          <p class="text-gray-600 text-sm mb-2">📍 {{ t.venue }}</p>
+          <p class="text-gray-700 mt-2">👥 {{ t.num_teams }} Teams</p>
+          <p class="text-gray-700">⚡ {{ t.num_matches }} Matches</p>
+          <button class="mt-4 bg-yellow-400 text-black px-5 py-2 rounded-md font-semibold hover:bg-yellow-500 transition">
+            View Fixtures
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+        <p class="text-center text-gray-500">No current tournaments available.</p>
+      {% endif %}
+    </div>
+
+    <!-- Upcoming Tournaments -->
+    <div class="bg-gray-50 rounded-3xl shadow-lg p-8 mb-16">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">🚀 Upcoming Tournaments</h2>
+      {% if upcoming_tournaments %}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {% for t in upcoming_tournaments %}
+        <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-6 text-center">
+          <img src="{{ t.logo.url }}" alt="{{ t.name }}" class="w-20 h-20 mx-auto mb-4">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">{{ t.name }}</h3>
+          <p class="text-gray-600 text-sm mb-2">📅 Starts: {{ t.start_date }}</p>
+          <p class="text-gray-600 text-sm mb-2">📍 {{ t.venue }}</p>
+          <p class="text-gray-700 mt-2">👥 {{ t.num_teams }} Teams</p>
+          <button class="mt-4 bg-green-500 text-white px-5 py-2 rounded-md font-semibold hover:bg-green-600 transition">
+            View Details
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+        <p class="text-center text-gray-500">No upcoming tournaments available.</p>
+      {% endif %}
+    </div>
+
+    <!-- Past Tournaments -->
+    <div class="bg-white rounded-3xl shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">⏳ Past Tournaments</h2>
+      {% if past_tournaments %}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {% for t in past_tournaments %}
+        <div class="bg-gray-100 rounded-2xl shadow-md hover:shadow-xl transition p-6 text-center">
+          <img src="{{ t.logo.url }}" alt="{{ t.name }}" class="w-20 h-20 mx-auto mb-4 opacity-80">
+          <h3 class="text-xl font-bold text-gray-700 mb-2">{{ t.name }}</h3>
+          <p class="text-gray-600 text-sm mb-2">📅 {{ t.start_date }} - {{ t.end_date }}</p>
+          <p class="text-gray-600 text-sm mb-2">📍 {{ t.venue }}</p>
+          <p class="text-gray-700 mt-2">👥 {{ t.num_teams }} Teams</p>
+          <p class="text-gray-700">⚡ {{ t.num_matches }} Matches</p>
+          <button class="mt-4 bg-gray-400 text-white px-5 py-2 rounded-md font-semibold cursor-not-allowed">
+            Completed
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+        <p class="text-center text-gray-500">No past tournaments available.</p>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% endblock body %}

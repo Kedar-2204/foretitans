@@ -1,0 +1,159 @@
+{% extends "base1.html" %}
+{% block body %}
+<div class="container mt-4">
+  <div class="row g-4 justify-content-center">
+
+    <!-- Tournament Card -->
+    <div class="col-lg-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-header text-white" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+          <h4 class="mb-0 fw-bold"><i class="bi bi-trophy-fill me-2"></i> Add Tournament</h4>
+        </div>
+        <div class="card-body bg-light">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'add_tournaments' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Tournament Name</label>
+              <input type="text" class="form-control rounded-pill" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Tournament Logo</label>
+              <input type="file" class="form-control rounded-pill" name="logo" accept="image/*" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Start Date</label>
+                <input type="date" class="form-control rounded-pill" name="start_date" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">End Date</label>
+                <input type="date" class="form-control rounded-pill" name="end_date" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Venue</label>
+              <input type="text" class="form-control rounded-pill" name="venue" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Number of Teams</label>
+              <input type="number" class="form-control rounded-pill" name="num_teams" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Number of Matches</label>
+              <input type="number" class="form-control rounded-pill" name="num_matches" required>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-success rounded-pill px-4">
+                <i class="bi bi-upload me-1"></i> Add Tournament
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Card -->
+    <div class="col-lg-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-header text-white" style="background: linear-gradient(135deg, #ff9966, #ff5e62);">
+          <h4 class="mb-0 fw-bold"><i class="bi bi-people-fill me-2"></i> Add Team</h4>
+        </div>
+        <div class="card-body bg-light">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'add_team' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Team Name</label>
+              <input type="text" class="form-control rounded-pill" name="team_name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Owner Name</label>
+              <input type="text" class="form-control rounded-pill" name="owner_name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Tournament</label>
+              {% for t in tournaments %}
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="tournaments" value="{{ t.id }}">
+                <label class="form-check-label">{{ t.name }}</label>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-warning rounded-pill px-4">
+                <i class="bi bi-plus-circle me-1"></i> Add Team
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player Card -->
+    <div class="col-lg-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-header text-white" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);">
+          <h4 class="mb-0 fw-bold"><i class="bi bi-person-fill me-2"></i> Add Player</h4>
+        </div>
+        <div class="card-body bg-light">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'add_player' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Player Name</label>
+              <input type="text" class="form-control rounded-pill" name="player_name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Contact</label>
+              <input type="text" class="form-control rounded-pill" name="contact" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Date of Birth</label>
+              <input type="date" class="form-control rounded-pill" name="dob" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Playing Role</label>
+              <select class="form-select rounded-pill" name="playing_role" required>
+                <option value="">-- Select Role --</option>
+                <option>Batsman</option>
+                <option>Bowler</option>
+                <option>All-rounder</option>
+                <option>Wicket-Keeper</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">City</label>
+              <input type="text" class="form-control rounded-pill" name="city" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">State</label>
+              <input type="text" class="form-control rounded-pill" name="state" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Team</label>
+              <select class="form-select rounded-pill" name="team" required>
+                {% for team in teams %}
+                <option value="{{ team.id }}">{{ team.team_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Tournament</label>
+              {% for t in tournaments %}
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="tournaments" value="{{ t.id }}">
+                <label class="form-check-label">{{ t.name }}</label>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-info rounded-pill px-4">
+                <i class="bi bi-person-plus-fill me-1"></i> Add Player
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

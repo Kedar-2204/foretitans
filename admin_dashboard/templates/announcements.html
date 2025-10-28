@@ -1,0 +1,46 @@
+{% extends "base1.html" %}
+{% block body %}
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-9">
+    <div class="card shadow-lg border-0">
+      <div class="card-header text-white" style="background: linear-gradient(135deg, #cc2b5e, #753a88);">
+        <h4 class="mb-0 fw-bold">
+          <i class="bi bi-bullhorn-fill me-2"></i> Post Announcement
+        </h4>
+      </div>
+      <div class="card-body bg-light">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="announcement_heading" class="form-label fw-semibold">Announcement Heading</label>
+            <input type="text" name="announcement_heading" id="announcement_heading" class="form-control rounded-pill px-4 py-2 shadow-sm" placeholder="Enter title" required>
+          </div>
+          <div class="mb-3">
+            <label for="announcement_date" class="form-label fw-semibold">Date</label>
+            <input type="date" name="announcement_date" id="announcement_date" class="form-control rounded-pill px-4 py-2 shadow-sm" required>
+          </div>
+          <div class="mb-3">
+            <label for="announcement_info" class="form-label fw-semibold">Detailed Info</label>
+            <textarea name="announcement_info" id="announcement_info" rows="8" class="form-control shadow-sm rounded-4" placeholder="Write announcement with formatting" required></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="announcement_image" class="form-label fw-semibold">Upload Image (Optional)</label>
+            <input type="file" name="announcement_image" id="announcement_image" class="form-control rounded-pill px-4 py-2 shadow-sm">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-danger btn-lg rounded-pill px-5 shadow">
+              <i class="bi bi-megaphone me-1"></i> Post
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CKEditor Rich Text -->
+<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('announcement_info');
+</script>
+{% endblock %}

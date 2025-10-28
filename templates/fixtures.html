@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Fixtures{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+
+  <h2 class="text-center text-warning fw-bold mb-5">FIXTURES</h2>
+
+  <div class="row g-4">
+    {% for day, matches in grouped_matches.items %}
+    <div class="col-lg-6 col-md-12">
+      <div class="day-block mb-4">
+        <h4 class="text-white fw-bold mb-3 text-center">DAY {{ day }}</h4>
+        <div class="row g-3">
+          {% for match in matches %}
+          <div class="col-md-6">
+            <div class="card shadow-lg h-100 rounded-3 border-0">
+              <div class="row g-0">
+                <!-- Date -->
+                <div class="col-3 bg-warning d-flex flex-column align-items-center justify-content-center text-dark fw-bold rounded-start">
+                  <div>{{ match.date|date:"d" }}</div>
+                  <small>{{ match.date|date:"M" }}</small>
+                  <small>{{ match.date|date:"Y" }}</small>
+                </div>
+                <!-- Match Info -->
+                <div class="col-9 p-3">
+                  <p class="text-center fw-semibold mb-1">{{ match.date|time:"P" }}</p>
+                  <div class="d-flex align-items-center justify-content-between">
+                    {% for team in match.teams.all %}
+                      <div class="text-center flex-fill">
+                        {% if team.logo %}
+                        <img src="{{ team.logo.url }}" alt="{{ team.team_name }}" class="img-fluid mb-2" style="max-height:50px;">
+                        {% endif %}
+                        <p class="fw-bold {% if forloop.counter == 1 %}text-success{% else %}text-danger{% endif %}">
+                          {{ team.team_name }}
+                        </p>
+                      </div>
+                      {% if not forloop.last %}
+                        <span class="fw-bold text-dark px-2">VS</span>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <p class="text-muted small mt-2 text-center">{{ match.venue }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  body { background: #06143d; }
+  .day-block h4 { border-bottom: 2px solid #ffc107; padding-bottom: 5px; }
+</style>
+{% endblock %}

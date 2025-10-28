@@ -1,0 +1,124 @@
+{% extends 'base1.html' %}
+{% block body %}
+<div class="container mt-5">
+  <h2 class="text-center mb-5 display-5 text-primary animated-heading">
+    🗑️ Trash - Deleted Players
+  </h2>
+
+  <div class="row">
+    {% for player in players %}
+    <div class="col-md-6 col-lg-4 mb-4 player-card-wrapper animate-fade-in">
+      <div class="card shadow-lg trash-card rounded-4 hover-scale">
+        <div class="card-body py-4 px-4 text-center">
+          <h4 class="fw-bold text-dark mb-2">{{ player.name }}</h4>
+          <hr class="mx-auto mb-3" style="width: 40px; border: 2px solid #007bff;">
+          <ul class="list-unstyled text-muted small mb-4">
+            <li><i class="bi bi-person-badge-fill me-2 text-primary"></i><strong>Role:</strong> {{ player.playing_role }}</li>
+            <li><i class="bi bi-geo-alt-fill me-2 text-success"></i><strong>City:</strong> {{ player.city }}, {{ player.state }}</li>
+            <li><i class="bi bi-phone-fill me-2 text-warning"></i><strong>Contact:</strong> {{ player.contact }}</li>
+            <li><i class="bi bi-calendar-event-fill me-2 text-danger"></i><strong>DOB:</strong> {{ player.dob }}</li>
+          </ul>
+          <button class="btn btn-success px-4 py-2 rounded-pill restore-btn transition-all" data-player-id="{{ player.id }}">
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Restore
+          </button>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-muted fs-5 mt-5">No deleted players found.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .animated-heading {
+    animation: typing 2.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #007bff;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #007bff }
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.03);
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+
+  .trash-card {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .trash-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .restore-btn:hover {
+    background-color: #218838 !important;
+    box-shadow: 0 4px 10px rgba(0, 128, 0, 0.3);
+  }
+
+  .trash-card ul li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+</style>
+
+<script>
+  document.querySelectorAll(".restore-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const playerId = btn.dataset.playerId;
+      if (!confirm("Restore this player?")) return;
+
+      fetch("{% url 'trash_players' %}", {
+        method: "POST",
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({ player_id: playerId })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          const wrapper = btn.closest(".player-card-wrapper");
+          wrapper.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+          wrapper.style.opacity = "0";
+          wrapper.style.transform = "scale(0.9)";
+          setTimeout(() => wrapper.remove(), 400);
+        } else {
+          alert(data.message || "Restore failed.");
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block body %}
+
+<!-- Partners & Associations Page -->
+<section class="bg-[#0e1a2b] text-white">
+  <!-- Hero -->
+  <div class="bg-white py-12 text-center" style="margin-top:170px">
+    <h1 class="text-3xl md:text-4xl font-bold">
+      <span class="text-[#0e1a2b]">PARTNERS & ASSOCIATIONS</span>
+    </h1>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 py-16 space-y-20">
+
+    <!-- Associations Section -->
+    <div>
+      <h2 class="text-2xl font-bold flex items-center gap-2 justify-center mb-12">
+        <span>ASSOCIATIONS WE WORK WITH</span> <span class="text-yellow-400">▶</span>
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center">
+        {% for association in associations %}
+        <div class="bg-white rounded-lg shadow-md p-4 flex justify-center items-center h-28">
+          <img src="{{ association.photo.url }}" alt="{{ association.name }}" class="max-h-full object-contain">
+        </div>
+        {% empty %}
+        <p class="col-span-full text-center text-gray-400">No associations added yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Partners Section -->
+    <div>
+      <h2 class="text-2xl font-bold flex items-center gap-2 justify-center mb-12">
+        <span>OUR PARTNERS</span> <span class="text-yellow-400">▶</span>
+      </h2>
+
+      <!-- Principal Partner -->
+      <div class="mb-12 text-center">
+        <h3 class="text-xl font-semibold mb-4">PRINCIPAL PARTNER</h3>
+        {% if principal_partner %}
+          <img src="{{ principal_partner.image.url }}" alt="{{ principal_partner.info }}" class="mx-auto h-24 object-contain">
+        {% else %}
+          <p class="text-gray-400">No principal partner added yet.</p>
+        {% endif %}
+      </div>
+
+      <!-- Other Partners Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+        {% for partner in partners %}
+        <div>
+          <div class="bg-white rounded-lg shadow-md p-4 flex justify-center items-center h-24">
+            <img src="{{ partner.image.url }}" alt="{{ partner.info }}" class="max-h-full object-contain">
+          </div>
+        </div>
+        {% empty %}
+        <p class="col-span-full text-center text-gray-400">No partners added yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock body %}
